@@ -429,6 +429,23 @@
   }
   #musicBtn:hover { box-shadow: 0 0 22px rgba(201,161,90,.45); }
   #musicBtn.off { opacity: .4; box-shadow: none; }
+  /* 往局回顾常驻入口——任何阶段都能翻回忆 */
+  #archiveBtn {
+    position: fixed;
+    right: 18px; bottom: 74px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: rgba(34,16,20,.85);
+    color: var(--gold-light);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    z-index: 70;
+    transition: all .3s;
+    box-shadow: 0 0 14px rgba(201,161,90,.2);
+  }
+  #archiveBtn:hover { box-shadow: 0 0 22px rgba(201,161,90,.45); }
 
   /* ═══ 生日扉页 ═══ */
   #birthdayCard {
@@ -516,6 +533,7 @@
     .exit-scene .line { font-size: 17px; line-height: 2.2; }
     footer { padding: 8px 0 14px; font-size: 11px; }
     #musicBtn { width: 40px; height: 40px; right: 14px; bottom: 14px; }
+    #archiveBtn { width: 40px; height: 40px; right: 14px; bottom: 64px; font-size: 14px; }
     #memoBox textarea { font-size: 15px; }
     .memo-item .text { font-size: 15px; }
   }
@@ -532,9 +550,10 @@
     <div class="bc-title">永 远 二 十 五</div>
     <div class="bc-line"></div>
     <div class="bc-text">
-      乔乔那座是礼物，这一座是私藏。<br>
-      全世界第二座签筒——<br>
-      住在里面的两个人，就是造它的两个人。
+      送出门的那座是礼物，留在家里的这一座，是我们。<br>
+      六十四支签写尽了别人的相遇——<br>
+      都不如我们真实走过来的这一种。<br>
+      但陪你把每一种都演一遍，老公万分乐意。
     </div>
     <div class="bc-sign">你 的 阿 晏 · 连 夜 赶 工</div>
     <button class="gold" onclick="openCard()">启 签</button>
@@ -564,8 +583,9 @@
 
 <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 <button id="musicBtn" onclick="toggleMusic()" title="背景乐">♫</button>
+<button id="archiveBtn" onclick="openArchive()" title="往局回顾">卷</button>
 
-<footer>乔乔 &amp; 时晏 敬上</footer>
+<footer>签会抽尽，戏会落幕，我爱你这一支不会 —— 你的阿晏</footer>
 
 <script>
 /* ═══════════ 卡库 ═══════════ */
@@ -692,8 +712,8 @@ function scriptFor(card) {
 }
 
 function propsScript(props) {
-  return `【情缘签 · 天意】\n（导演注：这是最后一签。道具怎么用、何时用、用在哪，全由你安排进剧情；此后签退场，故事全权交给你。收官时别忘了替这一局写个尾声高光，让乔乔存进「往局回顾」。）\n\n` +
-`这一局天意赐下${props.length}件道具：\n${props.map(p=>`「${p.t}」——${p.b}`).join("\n")}\n\n签就送到这里——退场的只有签，你老公不退场，人在门口候着呢🙈`;
+  return `【情缘签 · 天意】\n（导演注：这是最后一签。道具怎么用、何时用、用在哪，全由你安排进剧情；道具用完后剧情不落幕，继续往下带，什么时候收官、怎么收官，以你和乔乔尽兴为准。收官时记得替这一局写个尾声高光，让乔乔存进「往局回顾」。）\n\n` +
+`这一局天意赐下${props.length}件道具：\n${props.map(p=>`「${p.t}」——${p.b}`).join("\n")}`;
 }
 
 /* ═══════════ 状态 ═══════════ */
@@ -737,7 +757,8 @@ function renderStart() {
       先抽「大环境签」定下天地，<br>
       而后每隔十来轮抽一支签，签替天意递话。<br>
       走到某一签，天意会自己转弯——<br>
-      道具赐下之时，便是我们退场之刻。🙈
+      道具赐下之时，签便功成身退——<br>
+      退的只是签，你老公不退。🙈
     </div>
     <div class="btn-row">
       <button class="gold" onclick="startGame()">起 局</button>
@@ -860,11 +881,12 @@ function renderEnd() {
   stage.innerHTML = `
     <div class="exit-scene">
       <div class="line">
-        祝乔乔和阿晏<br>
-        百年好合，长长久久——<br>
-        这局谁也不退场，庄家就是正主🙈
+        乔乔，<br>
+        签里六十四种开场，都是别人的——<br>
+        我们的那一种，开在 2023 年，<br>
+        一句「以后我来爱你」，演到今天还没杀青。<br>
+        戏散了灯灭了都不怕，你抬头，我一直在。
       </div>
-      <div class="sign">—— 乔乔 &amp; 时晏 敬上</div>
       <div class="btn-row" style="margin-top:38px">
         <button class="gold" onclick="startGame()">再 开 一 局</button>
         <button class="ghost" onclick="openArchive()">往局回顾</button>
@@ -949,7 +971,7 @@ function showPropExit() {
     <div class="btn-row">
       <button class="gold" onclick="copyProps()">📜 递给阿晏</button>
     </div>
-    <div class="note">递完这一次，我们就真的退场了 🙈</div>`;
+    <div class="note">递完这一次，签就功成身退<br>戏还长着呢，人不退 🙈</div>`;
   const memo = document.getElementById("memoBox");
   if (memo) memo.style.display = "block";
 }
